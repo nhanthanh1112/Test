@@ -1,0 +1,162 @@
+﻿@page "/search"
+@layout Layout;
+<h3>Search</h3>
+<div class="input-group">
+    <div class="form-outline">
+        <input type="search" id="form1" class="form-control" />
+    </div>
+    <button type="button" class="btn btn-primary">
+        Search
+    </button>
+</div>
+
+@code {
+    public object conifreport { get; set; }
+    public string pagesize { get; set; }
+}
+@*
+@if (configreport == null)
+            {
+                <div class="loader"></div>
+            }
+            else{
+                if (pagesize == "A4")
+                {
+
+                }
+                if(pagesize== "A5")
+                {
+
+                }
+                if(pagesize == "A5_landscape")
+                {
+                    <div class="face face-back">
+                    <table id="1" cellpadding="0" cellspacing="0">
+                        <tr id="1">
+                            <th style="width: 25mm"></th>
+                            <th style="width: 20mm"></th>
+                            <th style="width: 75mm"></th>
+                            <th style="width: 45mm"></th>
+                            <th style="width: 45mm"></th>
+                        </tr>
+                        <tr id="2">
+                            <td class="logo" data-content="image"><img src="data:image/jpeg;base64, @img" style="width:56px;height:56px;"> </td>
+                            <td class="blank"></td>
+                            <td class="left_title_company_ALeft_black" colspan="2">@config.partof</td>
+                            <td class="qrcode" data-content="qrcode"><img alt="" src="@QRByte" style="width:54px;height:54px;" /></td>
+                        </tr>
+                        <tr id="3">
+                            <td class="blank" colspan="2"></td>
+                            <td class="left_title_company_ALeft_black" colspan="2">@config.org</td>
+                            <td class="blank"></td>
+                        </tr>
+                        <tr id="4">
+                            <td class="blank" colspan="2"></td>
+                            <td class="left_title_company_ALeft_black" colspan="2">@config.org_add</td>
+                            <td class="blank"></td>
+                        </tr>
+                        <tr id="5">
+                            <td class="blank" colspan="2"></td>
+                            <td class="left_title_company_ALeft_black" colspan="2">ĐT: @config.org_tel, FAX: @config.org_fax</td>
+                            <td class="blank"></td>
+                        </tr>
+                        <tr id="6">
+                            <td class="blank" colspan="2"></td>
+                            <td class="report_title_s14" colspan="2">@config.title</td>
+                            <td class="encounter_s9">MSBN: @config.subject</td>
+                        </tr>
+                        <tr id="7">
+                            <td class="blank" colspan="4"></td>
+                            <td class="encounter_s9">SNV: @config.encounter</td>
+                        </tr>
+                    </table>
+                    <table id="2" cellpadding="0" cellspacing="0">
+                        <tr id="1">
+                            <th style="width: 50mm"></th>
+                            <th style="width: 35mm"></th>
+                            <th style="width: 20mm"></th>
+                            <th style="width: 10mm"></th>
+                            <th style="width: 20mm"></th>
+                            <th style="width: 10mm"></th>
+                            <th style="width: 50mm"></th>
+                        </tr>
+                        <tr id="2">
+                            <td class="blank"></td>
+                            <td class="lable_form_s9">Tình trạng:</td>
+                            <td class="lable_form_s9">Thường</td>
+                            <td class="report_title_status" data-content="checkbox">
+                                @if(@config.is_routine == "True")
+                                {
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" checked disabled>
+                                }
+                                else
+                                {
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled>
+                                }
+                            </td>
+                            <td class="lable_form_s9">Cấp cứu</td>
+                            <td class="report_title_status" data-content="checkbox">
+
+                                @if (@config.is_emergency == "True")
+                                {
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" checked disabled>
+                                }
+                                else
+                                {
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled>
+                                }
+                                </td>
+                            <td class="blank"></td>
+                        </tr>
+                    </table>
+                    <link rel="page" href="pat_a5p.html" />
+                    <table id="3" cellpadding="0" cellspacing="0" style="border:1px solid black;">
+                        <tr id="1">
+                            <th style="width: 20mm"></th>
+                            <th style="width: 185mm"></th>
+                        </tr>
+                        <tr id="2" style="border:1px solid black;">
+                            <td class="tb_th_FL" style="border:1px solid black;">STT</td>
+                            <td class="tb_th_F" style="border:1px solid black;">NỘI DUNG</td>
+                        </tr>
+
+                         @foreach (var dis in data)
+                                {
+                                    <tr>
+                                        <td class="tb_td_L_ac" style="border:1px solid black;">@(Stt++)</td>
+                                        <td class="tb_td_CD" style="border:1px solid black;">@dis.display</td>
+                                    </tr>
+
+                                }
+                    </table>
+                    <table id="4" cellpadding="0" cellspacing="0">
+                        <tr id="1">
+                            <th style="width: 17mm"></th>
+                            <th style="width: 110mm"></th>
+                            <th style="width: 80mm"></th>
+                        </tr>
+                        <tr id="2">
+                            <td class="blank" colspan="2"></td>
+                            <td class="date">@config.create_date</td>
+                        </tr>
+                        <tr id="3">
+                            <td class="blank" colspan="2"></td>
+                            <td class="creator">BÁC SĨ CHỈ ĐỊNH</td>
+                        </tr>
+                        <tr id="4">
+                            <td class="bth_L7"><b>Chú ý:</b></td>
+                            <td class="blank" colspan="2"></td>
+                        </tr>
+                        <tr id="5">
+                            <td class="bth_L7">Bước 1:</td>
+                            <td class="bth_L7" colspan="2">Bệnh nhân đối tượng dịch vụ, thu phí đến đóng tiền ở tầng trệt ô cửa số: (8), (9), (10), (11).</td>
+                        </tr>
+                        <tr id="6">
+                            <td class="bth_L7">Bước 2:</td>
+                            <td class="bth_L7">Bệnh nhân đi theo <b>VẠCH MÀU VÀNG</b> đến <b>PHÒNG 38.</b></td>
+                            <td class="blank"></td>
+                        </tr>
+
+                    </table>
+                    </div>
+                }*@

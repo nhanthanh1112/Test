@@ -1,0 +1,57 @@
+﻿@page "/"
+@using Blazor.Services;
+@using System.Net;
+@using System.Net.Http.Headers;
+@using Newtonsoft.Json;
+@using System.Net.Http.Json;
+@using System.Linq;
+@using System.Text.Json;
+@using System.Text.Json.Nodes;
+@inject NavigationManager NavigationManager
+@inject ILogin _loginclient;
+<PageTitle>Index</PageTitle>
+
+
+<div class="animated bounceInDown">
+    <div class="container">
+        <form name="form1" class="box" onsubmit="return checkStuff()">
+            <h4>Admin<span>Dashboard</span></h4>
+            <h5>Sign in to your account.</h5>
+            <input type="text" name="email" placeholder="Email" id="user" @bind-value="user" runat="server"  autocomplete="off">
+            <i class="typcn typcn-eye" id="eye"></i>
+            <input type="password" name="password" placeholder="Passsword" id="pwd" @bind-value="pwd" autocomplete="off">
+            <a href="#" class="forgetpass">Forget Password?</a>
+            <input type="submit" value="Sign in" class="btn1" @onclick=OnClickHandler>
+            
+        </form>
+    </div>
+    <div class="footer">
+        <span><b>wBlockSign</b> &copy; 2023 by <b>VASD</b></span>
+    </div>
+</div>
+@code{
+    public string user { get; set; }
+    public string pwd { get; set; }
+    public string token { get; set; }
+    public string code { get; set; }
+    private async void OnClickHandler()
+    {
+        
+        
+        /*if(user!=null && pwd != null)
+        {
+            var result = await _loginclient.Login(user.ToString(), pwd);
+            dynamic stuff = JsonConvert.DeserializeObject(result);
+            var value = stuff.value;
+            if (value != null)
+                token = value.token;
+            if (value != null)
+                code = value.code;
+            
+        }*/
+        StateHasChanged();
+        NavigationManager.NavigateTo("/dashboard", true);
+       
+    }
+}
+
